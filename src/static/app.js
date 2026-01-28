@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeLoginModal = document.querySelector(".close-login-modal");
   const loginMessage = document.getElementById("login-message");
 
+  // Announcement banner elements
+  const announcementBanner = document.getElementById("announcement-banner");
+  const closeBannerButton = document.querySelector(".close-banner");
+
   // Activity categories with corresponding colors
   const activityTypes = {
     sports: { label: "Sports", color: "#e8f5e9", textColor: "#2e7d32" },
@@ -854,6 +858,20 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error signing up:", error);
     }
   });
+
+  // Announcement banner close functionality
+  if (closeBannerButton && announcementBanner) {
+    closeBannerButton.addEventListener("click", () => {
+      announcementBanner.classList.add("hidden");
+      // Store in localStorage to remember user's preference
+      localStorage.setItem("announcementBannerClosed", "true");
+    });
+
+    // Check if user previously closed the banner
+    if (localStorage.getItem("announcementBannerClosed") === "true") {
+      announcementBanner.classList.add("hidden");
+    }
+  }
 
   // Expose filter functions to window for future UI control
   window.activityFilters = {
